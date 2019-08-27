@@ -96,6 +96,16 @@ static void UART_Init(void)
     Error_Handler(); 
   }
 }
+static void vTaskCode(void *params)
+{
+  configASSERT(((uint32_t)params == 1));
+  
+  for(;;)
+  {
+    vTaskDelay(1000);
+    HAL_UART_Transmit(&UartHandle, (uint8_t*)task1msg, sizeof(task1msg), HAL_MAX_DELAY);
+  }
+}
 /**
   * @brief  Main program
   * @param  None
@@ -123,7 +133,15 @@ int main(void)
      */
   LED_Init();
   UART_Init();
-
+  BaseType_t xReturned;
+  xReturned = xTaskCreate(vTaskCode, "TASK1",
+                          256, (void*)1,
+                          1, &Task1);
+  if (xReturned == pdPASS)
+     HAL_UART_Transmit(&UartHandle, (uint8_t*)"SUCCESS", 7, HAL_MAX_DELAY);
+  
+  vTaskStartScheduler();
+#if 0
   /* Infinite loop */
   while (1)
   {
@@ -133,6 +151,7 @@ int main(void)
     
     HAL_Delay(1000);
   }
+#endif
 }
 
 /**

@@ -357,6 +357,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32F4xx-Nucleo</state>
                     <state>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F</state>
+                    <state>$PROJ_DIR$</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1232,21 +1233,21 @@
             </file>
         </group>
         <group>
+            <name>Protable</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F\port.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F\portasm.s</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F\portmacro.h</name>
+            </file>
+        </group>
+        <group>
             <name>User</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\croutine.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\event_groups.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\list.c</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\Src\main.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\queue.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_msp.c</name>
@@ -1254,12 +1255,30 @@
             <file>
                 <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
             </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\tasks.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\timers.c</name>
-            </file>
         </group>
+    </group>
+    <group>
+        <name>FreeRTOS</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\croutine.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\event_groups.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_2.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\list.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\queue.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\tasks.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\timers.c</name>
+        </file>
     </group>
 </project>
