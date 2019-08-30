@@ -96,14 +96,27 @@ static void UART_Init(void)
     Error_Handler(); 
   }
 }
-static void vTaskCode(void *params)
+static void vTask1Code(void *params)
 {
   configASSERT(((uint32_t)params == 1));
   
   for(;;)
   {
-    vTaskDelay(1000);
     HAL_UART_Transmit(&UartHandle, (uint8_t*)task1msg, sizeof(task1msg), HAL_MAX_DELAY);
+    vTaskDelay(1000);
+  }
+}
+static void vTask2Code(void *params)
+{
+  uint8_t buffer = 0;
+  configASSERT(((uint32_t)params == 1));
+  
+  for(;;)
+  {
+    HAL_UART_Receive(&UartHandle, &buffer, sizeof(buffer), HAL_MAX_DELAY);
+    if (buffer == 'A')
+       vTaskDelay(100);
+    //HAL_UART_Transmit(&UartHandle, &buffer, sizeof(buffer), HAL_MAX_DELAY);
   }
 }
 /**
@@ -134,11 +147,17 @@ int main(void)
   LED_Init();
   UART_Init();
   BaseType_t xReturned;
-  xReturned = xTaskCreate(vTaskCode, "TASK1",
+  xReturned = xTaskCreate(vTask1Code, "TASK1",
                           256, (void*)1,
                           1, &Task1);
   if (xReturned == pdPASS)
-     HAL_UART_Transmit(&UartHandle, (uint8_t*)"SUCCESS", 7, HAL_MAX_DELAY);
+     HAL_UART_Transmit(&UartHandle, (uint8_t*)"SUCCESS\r\n", 9, HAL_MAX_DELAY);
+
+  xReturned = xTaskCreate(vTask2Code, "TASK2",
+                          256, (void*)1,
+                          2, &Task2);
+  if (xReturned == pdPASS)
+     HAL_UART_Transmit(&UartHandle, (uint8_t*)"SUCCESS\r\n", 9, HAL_MAX_DELAY);
   
   vTaskStartScheduler();
 #if 0

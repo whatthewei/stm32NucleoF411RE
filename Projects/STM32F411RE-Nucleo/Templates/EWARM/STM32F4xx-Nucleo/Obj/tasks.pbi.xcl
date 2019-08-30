@@ -5,6 +5,8 @@
 -I
 D:\stm32NucleoF4\STM32CubeF4\Middlewares\Third_Party\FreeRTOS\Source
 -I
+D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\EWARM
+-I
 D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\EWARM\..\Inc
 -I
 D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\EWARM\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include
@@ -17,8 +19,6 @@ D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\EWARM\..\..\.
 -I
 D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\EWARM\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F
 -I
-D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\EWARM
--I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.32\arm\CMSIS\Core\Include
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.32\arm\CMSIS\DSP\Include
@@ -26,6 +26,8 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.32\arm\CMSIS\DSP\Include
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.32\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.32\arm\inc\c
+-I
+D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\EWARM
 -I
 D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\Inc
 -I
@@ -38,8 +40,6 @@ D:\stm32NucleoF4\STM32CubeF4\Drivers\BSP\STM32F4xx-Nucleo
 D:\stm32NucleoF4\STM32CubeF4\Middlewares\Third_Party\FreeRTOS\Source\include
 -I
 D:\stm32NucleoF4\STM32CubeF4\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F
--I
-D:\stm32NucleoF4\STM32CubeF4\Projects\STM32F411RE-Nucleo\Templates\EWARM
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.32\arm\CMSIS\Core\Include
 -I
