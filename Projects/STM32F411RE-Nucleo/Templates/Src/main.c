@@ -39,6 +39,8 @@
 #include "main.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
+#include "semphr.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -52,17 +54,23 @@
 /* Private define ------------------------------------------------------------*/
 #define TASK_PRIORITY_1 ( 2 )
 #define TASK_PRIORITY_2 ( 3 )
+#define TASK_PRIORITY_3 ( 1 )
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static char task1msg[7] = "task1\r\n";
 static char task2msg[7] = "task2\r\n";
+static char task3msg[7] = "task3\r\n";
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Error_Handler(void);
 
 xTaskHandle Task1;
 xTaskHandle Task2;
+xTaskHandle Task3;
+QueueHandle_t xQueue1 = NULL;
+SemaphoreHandle_t xSemaphore = NULL;
+
 
 /* Private functions ---------------------------------------------------------*/
 static GPIO_InitTypeDef  GPIO_InitStruct;
@@ -103,7 +111,7 @@ static void vTask1Code(void *params)
   for(;;)
   {
     HAL_UART_Transmit(&UartHandle, (uint8_t*)task1msg, sizeof(task1msg), HAL_MAX_DELAY);
-    vTaskDelay(1000);
+    vTaskDelay(50);
   }
 }
 static void vTask2Code(void *params)
@@ -115,8 +123,17 @@ static void vTask2Code(void *params)
   {
     HAL_UART_Receive(&UartHandle, &buffer, sizeof(buffer), HAL_MAX_DELAY);
     if (buffer == 'A')
-       vTaskDelay(100);
+       vTaskDelay(50);
     //HAL_UART_Transmit(&UartHandle, &buffer, sizeof(buffer), HAL_MAX_DELAY);
+  }
+}
+static void vTask3Code(void *params)
+{
+  configASSERT(((uint32_t)params == 1));
+  
+  for(;;)
+  {
+    
   }
 }
 /**
@@ -149,15 +166,29 @@ int main(void)
   BaseType_t xReturned;
   xReturned = xTaskCreate(vTask1Code, "TASK1",
                           256, (void*)1,
-                          1, &Task1);
+                          TASK_PRIORITY_1, &Task1);
   if (xReturned == pdPASS)
      HAL_UART_Transmit(&UartHandle, (uint8_t*)"SUCCESS\r\n", 9, HAL_MAX_DELAY);
 
   xReturned = xTaskCreate(vTask2Code, "TASK2",
                           256, (void*)1,
-                          2, &Task2);
+                          TASK_PRIORITY_2, &Task2);
   if (xReturned == pdPASS)
      HAL_UART_Transmit(&UartHandle, (uint8_t*)"SUCCESS\r\n", 9, HAL_MAX_DELAY);
+  
+  xReturned = xTaskCreate(vTask3Code, "TASK3",
+                          256, (void*)1,
+                          TASK_PRIORITY_3, &Task3);
+  if (xReturned == pdPASS)
+     HAL_UART_Transmit(&UartHandle, (uint8_t*)"SUCCESS\r\n", 9, HAL_MAX_DELAY);
+  
+  xQueue1 = xQueueCreate( 10, sizeof(unsigned long));
+  if (xQueue1 != NULL)
+    HAL_UART_Transmit(&UartHandle, (uint8_t*)"Q_SUCCESS\r\n", 11, HAL_MAX_DELAY);
+  
+  xSemaphore = xSemaphoreCreateBinary();
+  if (xSemaphore != NULL)
+    HAL_UART_Transmit(&UartHandle, (uint8_t*)"S_SUCCESS\r\n", 11, HAL_MAX_DELAY);
   
   vTaskStartScheduler();
 #if 0
